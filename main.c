@@ -25,7 +25,7 @@ void quicksort(int *a, int first, int last)
                    f=first,
                    l=last;
 
-    el=a[(first+last)/2];
+    el=((first+last)/2);
     m=a[el];
 
     do
@@ -73,7 +73,6 @@ void quicksort(int *a, int first, int last)
             f++;
             l--;
         }
-        printf("\n sravn = %d perest = %d", sravn, perest) ;
     }
 
     while (f <= l);
@@ -88,42 +87,51 @@ void quicksort(int *a, int first, int last)
 
 void insertsort(int *a, int n)
 {
-    for (int i = 1; i < n; i++)
-    {
-        for (int j = i; j > 0; j--)
-        {
-            if (a[j - 1] > a[j])
-            {
+    int i,k,j;
+    for (i = 1; i < n; i++)
+     { k = a[i];
+      j=i-1;
+      sravn++;
+        while (j >= 0 && a[j] > k)
+           {
                 perest++;
-                int tmp = a[j - 1];
-                a[j - 1] = a[j];
-                a[j] = tmp;
-            }
-            sravn++;
-        }
+                a[j + 1] = a[j];
+                j = j - 1;
+           }
+
+          a[j + 1] = k;
     }
 }
+
 
 void print_menu()
 {
 
     printf("\nWhat do you want to use?\n");
+    printf("0. exit\n");
     printf("1. Quicksort\n");
-    printf("2. insretsort\n");
+    printf("2. insertsort\n");
     printf("3. bubblesort\n");
 
 }
 
 int main()
 {
-    int variant;
+    int variant, k=1;
+    while(k)
+    {
     int  *a, n, i;
+    print_menu();
 
+     printf("\nchoose the number = ");
+     scanf("%d", &variant);
 
-    printf("vvedi kol-vo elementov massiva \n");
+    printf("\nvvedi kol-vo elementov massiva \n");
     scanf("%d", &n);
 
     int first = 0, last = n-1;
+
+
 
     a = (int*) malloc(n*sizeof(int));
 
@@ -131,16 +139,13 @@ int main()
     for (i=0; i<n; i++)
         scanf("%d", &a[i]);
 
-
-
-        print_menu(); // выводим меню на экран
-
-     printf("viberi nomer = ");
-     scanf("%d", &variant);
-
         switch (variant)
         {
+            case 0:
+            k=0;
+            break;
         case 1:
+
             quicksort(a, first, last) ;
             break;
 
@@ -161,7 +166,10 @@ int main()
         printf("%d  ", a[i]);
 
     printf("\n sravn = %d perest = %d", sravn, perest);
+    sravn = 0;
+    perest = 0;
 
+    }
 
 }
 
